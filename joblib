@@ -1,0 +1,19 @@
+import joblib  # To save and load the model
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+
+# Step 1: Load your dataset (replace 'your_dataset.csv' with your actual dataset file)
+df = pd.read_csv("dairy_spoilage_data_2025.csv")  # Update this with your actual CSV filename
+
+# Step 2: Select features (X) and target variable (y)
+X = df.drop(columns=["Spoilage_Status"])  # Replace "Spoilage_Status" with the actual column name
+y = df["Spoilage_Status"]  # This is the column you're predicting
+
+# Step 3: Train the model
+model = RandomForestClassifier()
+model.fit(X, y)
+
+# Step 4: Save the model to a file
+joblib.dump(model, "spoilage_model.pkl")
+
+print("✅ Model saved successfully as 'spoilage_model.pkl'!")
